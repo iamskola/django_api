@@ -48,13 +48,16 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
+    
+    
 ]
 
 ROOT_URLCONF = 'Django_api.urls'
@@ -74,6 +77,14 @@ CORS_ALLOW_METHODS = (
     "POST",
     "PUT",
 )
+
+STORAGES={
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
+
+WHITENOISE_MANIFEST_STRICT=False
 
 TEMPLATES = [
     {
@@ -162,9 +173,11 @@ DJOSER = {
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT=BASE_DIR/'staticfiles'
 MEDIA_URL='media/'
 
 MEDIA_ROOT=BASE_DIR/'mediafiles'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -179,3 +192,4 @@ EMAIL_HOST_PASSWORD = '47f9c72c02ec1c'
 EMAIL_PORT = '2525'
 DEFAULT_FROM_EMAIL='support@myapi.com'
 DOMAIN='local_host:8000'
+

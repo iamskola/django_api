@@ -6,8 +6,6 @@ class CategorySerializer(serializers.Serializer):
     id= serializers.IntegerField(read_only=True)
     name=serializers.CharField(max_length=50, min_length=4)
     
-
-
     def validate(self, attrs):
         name=attrs.get('name')
         if name =='acid':
